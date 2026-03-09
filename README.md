@@ -1,4 +1,5 @@
 # 🎵 Entertainment Platform
+<img width="2559" height="1210" alt="image" src="https://github.com/user-attachments/assets/e01d8c86-e3bd-4663-85e6-55341b0caf82" />
 
 A full-stack entertainment and live events platform built with React, FastAPI, and PostgreSQL. Features ticket purchasing, artist roster management, merch shop with Stripe payments, and a full admin dashboard.
 
