@@ -16,6 +16,7 @@ import Merch from "./pages/Merch"
 import AIChat from "./components/AIchat"
 import CheckoutSuccess from "./pages/CheckoutSuccess"
 import CheckoutCancel from "./pages/CheckoutCancel"
+import API_URL from './lib/api'
 
 interface Event {
   id: number
@@ -49,7 +50,7 @@ function HomePage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/events")
+      .get(`${API_URL}/events`)
       .then((res) => setEvents(res.data))
       .catch(() => setError("Could not load events. Make sure the backend is running."))
       .finally(() => setLoading(false))

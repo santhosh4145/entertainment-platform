@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import { useAuthStore } from "@/store/authStore";
 import { useCartStore } from "@/store/CartStore";
+import API_URL from '../lib/api';
 
 interface MerchItem {
   id: number;
@@ -45,7 +46,7 @@ export default function Merch() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/merch/")
+      .get(`${API_URL}/merch/`)
       .then((res) => setMerchItems(res.data))
       .catch((err) => console.error("Failed to load merch:", err))
       .finally(() => setLoading(false));
@@ -72,7 +73,7 @@ export default function Merch() {
     setCheckoutLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/create-checkout-session", {
+      const response = await fetch(`${API_URL}/create-checkout-session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Flame } from "lucide-react"
 import axios from "axios"
 import { useAuthStore } from "@/store/authStore"
+import API_URL from '../lib/api'
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -17,7 +18,7 @@ export default function Login() {
     setLoading(true)
     setError("")
     try {
-      const res = await axios.post("http://localhost:8000/auth/login", { email, password })
+      const res = await axios.post(`${API_URL}/auth/login`, { email, password })
       login(res.data.user, res.data.access_token)
       navigate("/")
     } catch {

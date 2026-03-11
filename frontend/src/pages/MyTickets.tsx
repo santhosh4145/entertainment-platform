@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Flame, Ticket, MapPin, Calendar, ArrowLeft, ShoppingBag } from "lucide-react"
 import axios from "axios"
 import { useAuthStore } from "@/store/authStore"
+import API_URL from '../lib/api'
 
 interface TicketData {
   id: number
@@ -38,8 +39,8 @@ export default function MyTickets() {
     async function fetchData() {
       try {
         const [ticketsRes, eventsRes] = await Promise.all([
-          axios.get(`http://localhost:8000/tickets/mine?token=${token}`),
-          axios.get("http://localhost:8000/events")
+          axios.get(`${API_URL}/tickets/mine?token=${token}`),
+          axios.get(`${API_URL}/events`)
         ])
 
         setTickets(ticketsRes.data)

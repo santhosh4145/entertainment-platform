@@ -8,6 +8,7 @@ import {
 } from "lucide-react"
 import axios from "axios"
 import { useAuthStore } from "@/store/authStore"
+import API_URL from '../lib/api';
 
 interface Event {
   id: number
@@ -62,10 +63,10 @@ export default function Admin() {
   async function fetchAll() {
     try {
       const [statsRes, eventsRes, usersRes, ticketsRes] = await Promise.all([
-        axios.get(`http://localhost:8000/admin/stats?token=${token}`),
-        axios.get(`http://localhost:8000/events`),
-        axios.get(`http://localhost:8000/admin/users?token=${token}`),
-        axios.get(`http://localhost:8000/admin/tickets?token=${token}`),
+        axios.get(`${API_URL}/admin/stats?token=${token}`),
+        axios.get(`${API_URL}/events`),
+        axios.get(`${API_URL}/admin/users?token=${token}`),
+        axios.get(`${API_URL}/admin/tickets?token=${token}`),
       ])
       setStats(statsRes.data)
       setEvents(eventsRes.data)
@@ -86,7 +87,7 @@ export default function Admin() {
     setSaving(true)
     setError("")
     try {
-      await axios.post(`http://localhost:8000/admin/events?token=${token}`, {
+      await axios.post(`${API_URL}/admin/events?token=${token}`, {
         id: 0,
         title: newEvent.title,
         date: newEvent.date,
@@ -106,7 +107,7 @@ export default function Admin() {
   async function handleDeleteEvent(id: number) {
     if (!confirm("Delete this event?")) return
     try {
-      await axios.delete(`http://localhost:8000/admin/events/${id}?token=${token}`)
+      await axios.delete(`${API_URL}/admin/events/${id}?token=${token}`)
       fetchAll()
     } catch {
       alert("Could not delete event")

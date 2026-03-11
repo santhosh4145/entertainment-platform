@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Flame, MapPin, Calendar, Ticket, ArrowLeft, CheckCircle } from "lucide-react"
 import axios from "axios"
 import { useAuthStore } from "@/store/authStore"
+import API_URL from '../lib/api'
 
 interface Event {
   id: number
@@ -25,7 +26,7 @@ export default function EventDetail() {
   const [error, setError] = useState("")
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/events/${id}`)
+    axios.get(`${API_URL}/events/${id}`)
       .then(res => setEvent(res.data))
       .catch(() => setError("Event not found"))
       .finally(() => setLoading(false))
