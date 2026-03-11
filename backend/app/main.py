@@ -29,11 +29,15 @@ if not stripe.api_key:
     raise ValueError("STRIPE_SECRET_KEY not found in .env")
 
 # ────────────────────────────────────────────────
-# CORS middleware (allow frontend localhost)
+# CORS middleware (allow frontend localhost and live domain)
 # ────────────────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://hotboxunderground.com",
+        "https://www.hotboxunderground.com"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -162,8 +166,8 @@ async def create_checkout_session():
                 # },
             ],
             mode="payment",
-            success_url="http://localhost:5173/checkout/success",
-            cancel_url="http://localhost:5173/checkout/cancel",
+            success_url="https://hotboxunderground.com/checkout/success",
+            cancel_url="https://hotboxunderground.com/checkout/cancel",
         )
         return {"url": session.url}
     except Exception as e:
